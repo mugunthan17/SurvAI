@@ -66,6 +66,7 @@ try {
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 router.post('/', upload.single('file'), async (req,res)=>{
+    console.log("🟢 /api/summary hit");
     try {
         if(!summaryModel){
             return res.status(500).json({error: "AI Model not initialized. Check server logs."});

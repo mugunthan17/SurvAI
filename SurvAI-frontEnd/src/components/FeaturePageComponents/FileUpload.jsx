@@ -4,9 +4,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import Logo from "./../../assets/Logo.png";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { summary, emotionData, keywordsToHighlight } from './../../assets/Data/fullSummaryData.js';
-import { answer }  from './../../assets/Data/customQuestionData.js';
-
+import { answer } from "./../../assets/Data/customQuestionData.js";
 
 const FileUpload = () => {
   const [fileInfo, setFileInfo] = useState(null);
@@ -20,26 +18,113 @@ const FileUpload = () => {
   const customExportRef = useRef(null);
   const exportRef = useRef(null);
   const summaryRef = useRef(null);
+  const [summaryData, setSummaryData] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [customAnswer, setCustomAnswer] = useState("");
 
   const handleFileChange = (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    const maxSize = 10 * 1024 * 1024;
-    if (file.size > maxSize) {
-      alert("The file size exceeds 10MB. Please upload a file smaller than 10MB.");
-      e.target.value = "";
-      return;
+    const file = e.target.files[0];
+    if (file) {
+      const maxSize = 10 * 1024 * 1024;
+      if (file.size > maxSize) {
+        alert(
+          "The file size exceeds 10MB. Please upload a file smaller than 10MB."
+        );
+        e.target.value = "";
+        return;
+      }
+
+      setFileInfo({
+        name: file.name,
+        size: formatBytes(file.size),
+      });
+    } else {
+      setFileInfo(null);
     }
+  };
 
-    setFileInfo({
-      name: file.name,
-      size: formatBytes(file.size),
-    });
-  } else {
-    setFileInfo(null);
-  }
-};
+  const getfullsummary = async () => {
+    setIsLoading(true); // Show loading spinner
+    console.log("Fetching full summary...");
 
+    try {
+      const fileInput = document.getElementById("fileInput");
+
+      if (fileInput?.files?.[0]) {
+        const file = fileInput.files[0];
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const res = await fetch("http://localhost:3000/api/summary", {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await res.json();
+        console.log("Summary Response:", data);
+
+        if (!res.ok) {
+          console.error("Summary Error:", data.error || "Server Error");
+          setErrorMessage(data.error || "Server Error");
+          return;
+        }
+
+        setSummaryData(data); // Store for displaying
+      } else {
+        console.warn("No file selected.");
+      }
+    } catch (err) {
+      console.error("Error fetching summary:", err.message);
+      setErrorMessage("Something went wrong while analyzing the summary.");
+    } finally {
+      setIsLoading(false); // Stop spinner
+      setShowSummary(true); // Display summary section
+      setTimeout(() => {
+        summaryRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
+    }
+  };
+
+  const getcustomanswer = async () => {
+    setIsLoading(true);
+    setShowQuestionCard(false); // Reset previous question card
+
+    try {
+      const fileInput = document.getElementById("fileInput");
+      if (!fileInput?.files?.[0] || !question.trim()) {
+        setErrorMessage("File or question is missing.");
+        return;
+      }
+      const file = fileInput.files[0];
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("question", question.trim());
+      const res = await fetch("http://localhost:3000/api/custom", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      console.log("Custom Question Response:", data);
+      setCustomAnswer(data.answer);
+      if (!res.ok) {
+        console.error("Custom Question Error:", data.error || "Server Error");
+        setErrorMessage(data.error || "Server Error");
+        return;
+      }
+      setAskedQuestion(question);
+      setShowQuestionCard(true);
+    } catch (err) {
+      console.error("Error fetching custom answer:", err.message);
+      setErrorMessage(
+        "Something went wrong while analyzing the custom question."
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleRemoveFile = () => {
     setFileInfo(null);
@@ -56,23 +141,6 @@ const FileUpload = () => {
     return `${(bytes / Math.pow(1024, i)).toFixed(2)} ${sizes[i]}`;
   };
 
-
-  const highlightKeywords = (text, keywords) => {
-    const regex = new RegExp(`(${keywords.join("|")})`, "gi");
-    const parts = text.split(regex);
-    return parts.map((part, index) =>
-      keywords.some(
-        (keyword) => part.toLowerCase() === keyword.toLowerCase()
-      ) ? (
-        <span key={index} className="text-[#2A3BFF] font-medium">
-          {part}
-        </span>
-      ) : (
-        <span key={index}>{part}</span>
-      )
-    );
-  };
-
   const handleExportPDF = async () => {
     if (!exportRef.current) return;
     exportRef.current.style.display = "block";
@@ -82,44 +150,16 @@ const FileUpload = () => {
       useCORS: true,
       backgroundColor: "#ffffff",
     });
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a4");
-    const pdfWidth = pdf.internal.pageSize.getWidth(); // 210 mm
-    const pdfHeight = pdf.internal.pageSize.getHeight(); // 297 mm
-    const imgProps = pdf.getImageProperties(imgData);
-    const imgWidth = imgProps.width;
-    const imgHeight = imgProps.height;
-    const scaledHeight = (imgHeight * pdfWidth) / imgWidth;
-    const yOffset =
-      scaledHeight < pdfHeight ? (pdfHeight - scaledHeight) / 2 : 0;
-    pdf.addImage(imgData, "PNG", 0, yOffset, pdfWidth, scaledHeight);
-    pdf.save("SurvAI_Report.pdf");
-    exportRef.current.style.display = "none";
-    setShowToast(true);
-  };
 
-  const handleCustomQuestionExport = async () => {
-    if (!customExportRef?.current) return;
-    customExportRef.current.style.display = "block";
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    const canvas = await html2canvas(customExportRef.current, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: "#ffffff",
-    });
     const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a4");
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
-    const imgProps = pdf.getImageProperties(imgData);
-    const imgWidth = imgProps.width;
-    const imgHeight = imgProps.height;
-    const scaledHeight = (imgHeight * pdfWidth) / imgWidth;
-    const yOffset =
-      scaledHeight < pdfHeight ? (pdfHeight - scaledHeight) / 2 : 0;
-    pdf.addImage(imgData, "PNG", 0, yOffset, pdfWidth, scaledHeight);
-    pdf.save("SurvAI_Custom_Question_Report.pdf");
-    customExportRef.current.style.display = "none";
+    const imgWidth = 210; // A4 width in mm
+    const pxPerMm = canvas.width / imgWidth;
+    const imgHeightMm = canvas.height / pxPerMm;
+    const pdf = new jsPDF("p", "mm", [imgHeightMm, imgWidth]);
+    pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeightMm);
+    pdf.save("SurvAI_Report.pdf");
+
+    exportRef.current.style.display = "none";
     setShowToast(true);
   };
 
@@ -137,6 +177,26 @@ const FileUpload = () => {
       </div>
     );
   };
+
+  const emotionData = summaryData
+    ? [
+        {
+          name: "Negative",
+          value: summaryData.emotionalAnalysis?.negative || 0,
+          color: "#FF2A2D",
+        },
+        {
+          name: "Neutral",
+          value: summaryData.emotionalAnalysis?.neutral || 0,
+          color: "#555555",
+        },
+        {
+          name: "Positive",
+          value: summaryData.emotionalAnalysis?.positive || 0,
+          color: "#2A3BFF",
+        },
+      ]
+    : [];
 
   return (
     <div className="w-full max-w-6xl mx-auto">
@@ -222,13 +282,7 @@ const FileUpload = () => {
                 <button
                   onClick={() => {
                     if (question.trim()) {
-                      setIsLoading(true);
-                      setShowQuestionCard(false); // reset previous question card
-                      setAskedQuestion(question);
-                      setTimeout(() => {
-                        setIsLoading(false);
-                        setShowQuestionCard(true);
-                      }, 2000);
+                      getcustomanswer();
                     }
                   }}
                   className="alexa bg-[#2A3BFF] text-white px-8 py-4 rounded-full shadow-lg hover:brightness-110 transition font-medium cursor-pointer w-full sm:w-auto mt-2"
@@ -257,110 +311,26 @@ const FileUpload = () => {
               {/* Question Card After Loading */}
               {showQuestionCard && (
                 <div className="flex flex-col">
-                  <div className="mt-8 bg-[#EEEEEE] px-8 py-6 flex flex-col md:flex-row lg:flex-row items-center justify-between">
-                    <h1 className="alexa text-2xl text-left text-[#0C0C0C] mb-6 md:mb-0 lg:mb-0">
-                      Question:{" "}
-                      <span className="pop text-xl text-[#2A3BFF] font-medium pl-0 md:pl-2 lg:pl-2">
+                  <div className="mt-8 bg-[#EEEEEE] px-8 py-10 flex flex-col md:flex-row lg:flex-row items-center justify-between">
+                    <h1 className="alexa text-xl text-left text-[#0C0C0C] mb-6 md:mb-0 lg:mb-0">
+                      QUESTION:{" "}
+                      <span className="pop text-xl text-[#0C0C0C] font-base pl-0 md:pl-2 lg:pl-2">
                         {askedQuestion}
                       </span>
                     </h1>
-                    <button
-                      onClick={handleCustomQuestionExport}
-                      className="pop text-medium bg-[#EEEEEE] gap-2 text-[#2A3BFF] px-4 py-2 items-center flex flex-row justify-center hover:cursor-pointer border hover:bg-[#2A3BFF] hover:text-[#EEEEEE]"
-                    >
-                      Export
-                      <svg
-                        className="w-4 h-4 ml-1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 10V4a1 1 0 0 0-1-1H9.914a1 1 0 0 0-.707.293L5.293 7.207A1 1 0 0 0 5 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2M10 3v4a1 1 0 0 1-1 1H5m5 6h9m0 0-2-2m2 2-2 2"
-                        />
-                      </svg>
-                    </button>
                   </div>
-                  <div className="text-left mb-10 pb-8 px-8 bg-[#EEEEEE] text-[#0C0C0C]">
-                    <pre className="whitespace-pre-wrap text-lg pop leading-relaxed text-[#0C0C0C]">
-                      {answer}
-                    </pre>
+                  <div className="text-left mb-10 pb-8 px-8 bg-[#EEEEEE] text-[#0C0C0C] flex flex-row items-center justify-between">
+                    <p className="whitespace-pre-wrap text-lg pop leading-relaxed text-[#2A3BFF]">
+                      <h1 className="alexa text-xl text-left text-[#0C0C0C] mb-6 md:mb-0 lg:mb-0">
+                        ANSWER:{" "}
+                        <span className="pop text-xl text-[#2A3BFF] font-medium pl-0 md:pl-2 lg:pl-2">
+                          {customAnswer}
+                        </span>
+                      </h1>
+                    </p>
                   </div>
                 </div>
               )}
-              <div
-                ref={customExportRef}
-                className="hidden w-[794px] h-[1123px] bg-white px-15 py-10 text-[#0C0C0C] font-sans flex flex-col justify-between"
-              >
-                {/* Header */}
-                <div className="text-center mt-8">
-                  <img
-                    src={Logo}
-                    className="h-8 w-auto mb-2 mx-auto"
-                    alt="SurvAI Logo"
-                  />
-                  <p className="pop text-sm text-[#0C0C0C]">
-                    Ask, Analyze, and Slay — Powered by{" "}
-                    <span className="alexa font-medium">SurvAI</span>
-                  </p>
-                  <hr className="w-full h-[1px] bg-[#0C0C0C] border-0 mt-4 mb-8" />
-                </div>
-
-                {/* Main Content */}
-                <div className="flex-grow text-left flex flex-col justify-start">
-                  {/* Title */}
-                  <h1 className="text-2xl font-semibold text-center alexa text-[#0C0C0C] mb-6">
-                    Custom Question Response Report
-                  </h1>
-
-                  {/* File Info */}
-                  <p className="text-lg alexa mb-4 text-[#2A3BFF]">
-                    <span className="text-[#0C0C0C] font-semibold mr-2">
-                      File Name:
-                    </span>
-                    {fileInfo?.name || "SampleFile.xlsx"}
-                  </p>
-
-                  {/* Question */}
-                  <div className="mb-4">
-                    <h2 className="text-lg font-semibold alexa text-[#0C0C0C] mb-2">
-                      Question Asked:
-                    </h2>
-                    <p className="text-base pop text-[#0C0C0C] leading-relaxed">
-                      {askedQuestion}
-                    </p>
-                  </div>
-
-                  {/* Answer */}
-                  <div className="mb-6">
-                    <h2 className="text-lg font-semibold alexa text-[#0C0C0C] mb-2">
-                      SurvAI's Response:
-                    </h2>
-                    <pre className="whitespace-pre-wrap text-base pop text-[#0C0C0C] leading-relaxed">
-                      {answer}
-                    </pre>
-                  </div>
-                </div>
-
-                {/* Footer */}
-                <div className="pt-4 border-t border-[#CCCCCC] text-sm text-[#555555] text-center pop">
-                  <p className="alexa">
-                    © {new Date().getFullYear()} SurvAI. All rights reserved.
-                  </p>
-                  <p className="mt-1">
-                    Generated on{" "}
-                    {new Date().toLocaleDateString("en-IN", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </p>
-                </div>
-              </div>
             </div>
           )}
 
@@ -369,19 +339,7 @@ const FileUpload = () => {
             <div className="text-center mt-4">
               {!showSummary && (
                 <button
-                  onClick={() => {
-                    setIsLoading(true);
-                    setTimeout(() => {
-                      setIsLoading(false);
-                      setShowSummary(true);
-                      setTimeout(() => {
-                        summaryRef.current?.scrollIntoView({
-                          behavior: "smooth",
-                          block: "start",
-                        });
-                      }, 100);
-                    }, 2000);
-                  }}
+                  onClick={getfullsummary}
                   className="mt-2 alexa bg-[#2A3BFF] text-white px-8 py-4 rounded-full shadow-lg hover:brightness-110 transition font-medium cursor-pointer w-full sm:w-auto"
                   style={{ boxShadow: "0 0 12px #2A3BFF88" }}
                 >
@@ -405,7 +363,7 @@ const FileUpload = () => {
                 </div>
               )}
 
-              {showSummary && (
+              {showSummary && summaryData && (
                 <div
                   ref={summaryRef}
                   className="mt-4 flex flex-col md:flex-row lg:flex-row items-center justify-center"
@@ -414,7 +372,7 @@ const FileUpload = () => {
                     {/* Left: Summary */}
                     <div className="mt-4 px-4 mb-0 md:mb-8 lg:mb-8 bg-[#EEEEEE] w-full md:w-full lg:w-[70%] flex flex-col justify-between">
                       <div className="mt-6 mx-2 flex flex-row gap-4 items-center text-left justify-between p-4">
-                        <h1 className="alexa text-2xl text-[#0C0C0C]">
+                        <h1 className="alexa text-2xl text-[#2A3BFF]">
                           Survey Summary:
                         </h1>
                         <button
@@ -439,20 +397,27 @@ const FileUpload = () => {
                         </button>
                       </div>
                       <div className="text-left text-lg ml-6 text-center items-center mb-6">
-                        {summary.points.map((point, index) => (
+                        <p className="pop text-base text-[#0C0C0C] pr-4 py-3 text-left leading-relaxed">
+                          {summaryData.summary}
+                        </p>
+                        <h1 className="mt-6 mb-2 alexa text-2xl text-[#2A3BFF]">
+                          Key Points
+                        </h1>
+
+                        {summaryData.points.map((point, index) => (
                           <p
                             key={index}
-                            className="pop text-base text-[#0C0C0C] pr-4 py-3 text-left leading-relaxed"
+                            className="pop text-base text-[#0C0C0C] pr-4 py-2 text-left leading-relaxed"
                           >
-                            {highlightKeywords(point, keywordsToHighlight)}
+                            ➤ {point}
                           </p>
                         ))}
                       </div>
                     </div>
 
                     {/* Right: Emotion Chart */}
-                    <div className="mt-4 mb-8 bg-[#EEEEEE] w-full md:w-full lg:w-[30%] flex flex-col justify-between items-center p-4">
-                      <h1 className="mt-4 alexa text-2xl text-[#0C0C0C] mb-4">
+                    <div className="mt-4 mb-8 bg-[#EEEEEE] w-full md:w-full lg:w-[30%] flex flex-col justify-evenly items-center p-4">
+                      <h1 className="mt-4 alexa text-2xl text-[#0C0C0C] mb-8">
                         Emotional Analysis
                       </h1>
                       <ResponsiveContainer width="100%" height={200}>
@@ -473,7 +438,7 @@ const FileUpload = () => {
                           </Pie>
                         </PieChart>
                       </ResponsiveContainer>
-                      <div className="mt-4 w-full text-left">
+                      <div className="mt-10 w-full text-left">
                         {emotionData.map((item, index) => (
                           <div
                             key={index}
@@ -481,7 +446,7 @@ const FileUpload = () => {
                           >
                             <div className="flex items-center">
                               <span
-                                className="w-3 h-3 rounded-full ml-20 md:ml-60 lg:ml-20"
+                                className="w-3 h-3 rounded-full ml-20 md:ml-60 lg:ml-10"
                                 style={{ backgroundColor: item.color }}
                               ></span>
                               <span className="text-[#0C0C0C] text-base pop pl-2">
@@ -499,124 +464,132 @@ const FileUpload = () => {
                 </div>
               )}
 
-              <div
-                ref={exportRef}
-                className="hidden w-[794px] h-[1123px] bg-white px-10 py-10 text-[#0C0C0C] font-sans flex flex-col justify-between"
-              >
-                {/* Header */}
-                <div className="text-center mt-8">
-                  <img
-                    src={Logo}
-                    className="h-8 w-auto mb-2 mx-auto"
-                    alt="SurvAI Logo"
-                  />
-                  <p className="pop text-sm text-[#0C0C0C]">
-                    Ask, Analyze, and Slay — Powered by{" "}
-                    <span className="alexa font-medium">SurvAI</span>
-                  </p>
-                  <hr className="w-full h-[1px] bg-[#0C0C0C] border-0 mt-4 mb-8" />
-                </div>
-
-                {/* Main Content */}
-                <div className="flex-grow text-left flex flex-col justify-start">
-                  {/* Title */}
-                  <h1 className="text-2xl text-center font-semibold alexa text-[#0C0C0C] mb-6">
-                    Full Summary of Survey Responses Report
-                  </h1>
-
-                  {/* File Info */}
-                  <p className="text-lg alexa mt-6 mb-6 text-[#2A3BFF]">
-                    <span className="text-[#0C0C0C] font-semibold mr-2">
-                      File Name:
-                    </span>{" "}
-                    {fileInfo?.name || "SampleFile.xlsx"}
-                  </p>
-
-                  {/* Summary Points */}
-                  <div className="mb-6">
-                    <h2 className="text-lg font-semibold alexa mb-3">
-                      Summary Highlights:
-                    </h2>
-                    <ul className="list-disc ml-6 text-base pop text-[#0C0C0C] space-y-2">
-                      {summary.points.map((point, idx) => (
-                        <li key={idx}>{point}</li>
-                      ))}
-                    </ul>
+              {summaryData && (
+                <div
+                  ref={exportRef}
+                  className="hidden w-[794px] bg-white px-10 py-10 text-[#0C0C0C] font-sans flex flex-col"
+                >
+                  {/* Header */}
+                  <div className="text-center mt-8">
+                    <img
+                      src={Logo}
+                      className="h-8 w-auto mb-2 mx-auto"
+                      alt="SurvAI Logo"
+                    />
+                    <p className="pop text-sm text-[#0C0C0C]">
+                      Ask, Analyze, and Slay — Powered by{" "}
+                      <span className="alexa font-medium">SurvAI</span>
+                    </p>
+                    <hr className="w-full h-[1px] bg-[#0C0C0C] border-0 mt-4 mb-8" />
                   </div>
 
-                  {/* Emotional Analysis */}
-                  <div className="mb-4">
-                    <h2 className="text-lg font-semibold alexa mb-4">
-                      Emotional Analysis:
-                    </h2>
-                    <div className="pt-4 flex flex-col md:flex-row justify-center items-center gap-4">
-                      {/* Donut Chart */}
-                      <div className="w-[220px] h-[180px] flex justify-center items-center">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <PieChart>
-                            <Pie
-                              data={emotionData}
-                              cx="50%"
-                              cy="50%"
-                              innerRadius={50}
-                              outerRadius={75}
-                              dataKey="value"
-                              startAngle={90}
-                              endAngle={-270}
-                              isAnimationActive={false}
-                            >
-                              {emotionData.map((entry, index) => (
-                                <Cell
-                                  key={`cell-${index}`}
-                                  fill={entry.color}
-                                />
-                              ))}
-                            </Pie>
-                          </PieChart>
-                        </ResponsiveContainer>
-                      </div>
+                  {/* Main Content */}
+                  <div className="flex flex-col text-left">
+                    <h1 className="text-2xl text-center font-semibold alexa text-[#0C0C0C] mb-6">
+                      Full Summary of Survey Responses Report
+                    </h1>
 
-                      {/* Legend */}
-                      <div className="space-y-2 text-base">
-                        {emotionData.map((item, index) => (
-                          <div
-                            key={index}
-                            className="flex justify-between items-center min-w-[160px]"
-                          >
-                            <div className="flex items-center gap-3">
-                              <span
-                                className="inline-block w-3 h-3 rounded-full"
-                                style={{ backgroundColor: item.color }}
-                              ></span>
-                              <span className="text-[#0C0C0C] pop">
-                                {item.name}
+                    <p className="text-lg alexa mt-6 mb-6 text-[#2A3BFF]">
+                      <span className="text-[#0C0C0C] font-semibold mr-2">
+                        File Name:
+                      </span>{" "}
+                      {fileInfo?.name || "SampleFile.xlsx"}
+                    </p>
+
+                    {/* Summary */}
+                    <div className="mb-6">
+                      <h2 className="text-lg font-semibold alexa mb-3">
+                        Complete Summary:
+                      </h2>
+                      <p className="ml-6 text-base pop text-[#0C0C0C]">
+                        {summaryData.summary}
+                      </p>
+                    </div>
+
+                    {/* Key Points */}
+                    <div className="mb-6">
+                      <h2 className="text-lg font-semibold alexa mb-3">
+                        Key Points:
+                      </h2>
+                      <ul className="list-disc ml-6 text-base pop text-[#0C0C0C] space-y-2">
+                        {summaryData.points.map((point, idx) => (
+                          <li key={idx}>{point}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Emotional Analysis */}
+                    <div className="mb-4">
+                      <h2 className="text-lg font-semibold alexa mb-4">
+                        Emotional Analysis:
+                      </h2>
+                      <div className="pt-4 flex flex-col md:flex-row justify-center items-center gap-4">
+                        <div className="w-[220px] h-[180px] flex justify-center items-center">
+                          <ResponsiveContainer width="100%" height="100%">
+                            <PieChart>
+                              <Pie
+                                data={emotionData}
+                                cx="50%"
+                                cy="50%"
+                                innerRadius={50}
+                                outerRadius={75}
+                                dataKey="value"
+                                startAngle={90}
+                                endAngle={-270}
+                                isAnimationActive={false}
+                              >
+                                {emotionData.map((entry, index) => (
+                                  <Cell
+                                    key={`cell-${index}`}
+                                    fill={entry.color}
+                                  />
+                                ))}
+                              </Pie>
+                            </PieChart>
+                          </ResponsiveContainer>
+                        </div>
+
+                        <div className="space-y-2 text-base">
+                          {emotionData.map((item, index) => (
+                            <div
+                              key={index}
+                              className="flex justify-between items-center min-w-[160px]"
+                            >
+                              <div className="flex items-center gap-3">
+                                <span
+                                  className="inline-block w-3 h-3 rounded-full"
+                                  style={{ backgroundColor: item.color }}
+                                ></span>
+                                <span className="text-[#0C0C0C] pop">
+                                  {item.name}
+                                </span>
+                              </div>
+                              <span className="font-semibold pop text-[#0C0C0C]">
+                                {item.value.toString().padStart(2, "0")}%
                               </span>
                             </div>
-                            <span className="font-semibold pop text-[#0C0C0C]">
-                              {item.value.toString().padStart(2, "0")}%
-                            </span>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Footer */}
-                <div className="pt-4 border-t border-[#CCCCCC] text-sm text-[#555555] text-center pop">
-                  <p className="alexa">
-                    © {new Date().getFullYear()} SurvAI. All rights reserved.
-                  </p>
-                  <p className="mt-1">
-                    Generated on{" "}
-                    {new Date().toLocaleDateString("en-IN", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </p>
+                  {/* Footer (OUTSIDE content) */}
+                  <div className="pt-4 mt-10 border-t border-[#CCCCCC] text-sm text-[#555555] text-center pop">
+                    <p className="alexa">
+                      © {new Date().getFullYear()} SurvAI. All rights reserved.
+                    </p>
+                    <p className="mt-1">
+                      Generated on{" "}
+                      {new Date().toLocaleDateString("en-IN", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           )}
         </div>
