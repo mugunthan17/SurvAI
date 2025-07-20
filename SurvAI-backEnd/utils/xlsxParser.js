@@ -1,35 +1,24 @@
-import ExcelJS from 'exceljs';
+import * as XLSX from 'xlsx';
+import fs from 'fs/promises';
+import path from 'path';
 
-const parseExcelJS = async function parseExcelJS(filePath) {
-    const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.readFile(filePath);
-    const worksheet = workbook.worksheets[0];
+const parseExcel = async function parseExcel(filePath) {
+    try {
+        const absoluteFilePath = path.resolve(filePath);
+        const buffer = await fs.readFile(absoluteFilePath);
+        
+        const workbook = XLSX.read(buffer, { type: 'buffer' });
+        const sheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[sheetName];
 
-    const rows = [];
-    // Get headers from the first row
-    const headerRow = worksheet.getRow(1);
-    // ExcelJS row.values are 1-indexed, so slice(1) to get actual values
-    const headers = headerRow.values.slice(1);
+        const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
 
-    // If you want to log headers for debugging:
-    console.log("Parsed Excel Headers:", headers);
-
-    // Iterate over rows starting from the second row (data rows)
-    // worksheet.eachRow takes an optional second argument for options like startRow/endRow
-    worksheet.eachRow({ includeEmpty: false, firstRow: 2 }, (row, rowNumber) => {
-        const rowValues = row.values.slice(1); // Get actual row values, slicing off the null at index 0
-        const obj = {};
-        headers.forEach((header, idx) => {
-            // Ensure header is not null/undefined/empty string
-            if (header) {
-                obj[header] = rowValues[idx] !== undefined ? rowValues[idx] : null; // Handle potential undefined values
-            }
-        });
-        rows.push(obj);
-    });
-
-    // The 'rows' array now directly contains the objects mapping headers to values
-    return rows;
+        console.log("Parsed Excel Data (Sheet JS - first 5 rows): ", jsonData.slice(0, 5));
+        return jsonData;
+    } catch (error) {
+        console.error("Error reading Excel File:", error);
+        throw new Error("Could not read the Excel file. Make sure it's a valid .xls or .xlsx format.");
+    }
 };
 
-export default parseExcelJS;
+export default parseExcel;
