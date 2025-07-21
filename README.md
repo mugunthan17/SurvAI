@@ -185,20 +185,20 @@ Photos comes here
 <p>This project is brought to you by:</p>
 
 <p><strong>👤 Mugunthan N</strong><br>
-🖌️ Designer & Developer<br>
-🔗 <a href="https://mugunthan17.github.io/portfolio-website/" target="_blank">Portfolio</a><br>
-💼 <a href="https://www.linkedin.com/in/mugunthann" target="_blank">LinkedIn</a>
+  - 🖌️ Designer & Developer<br>
+  - 🔗 <a href="https://mugunthan17.github.io/portfolio-website/" target="_blank">Portfolio</a><br>
+  - 💼 <a href="https://www.linkedin.com/in/mugunthann" target="_blank">LinkedIn</a>
 </p>
 
 <p><strong>👤 Nitish B</strong><br>
-🧠 Developer & Collaborator<br>
-🔗 <a href="https://nitishb.me/" target="_blank">Portfolio</a><br>
-💼 <a href="https://www.linkedin.com/in/nitishb-dev/" target="_blank">LinkedIn</a>
+  - 🧠 Developer & Collaborator<br>
+  - 🔗 <a href="https://nitishb.me/" target="_blank">Portfolio</a><br>
+  - 💼 <a href="https://www.linkedin.com/in/nitishb-dev/" target="_blank">LinkedIn</a>
 </p>
 
 <p><strong>👤 Sarweshwaran R S</strong><br>
-🧑‍💻 Developer & Collaborator<br>
-💼 <a href="https://www.linkedin.com/in/sarweshwaranrs/" target="_blank">LinkedIn</a>
+  - 🧑‍💻 Developer & Collaborator<br>
+  - 💼 <a href="https://www.linkedin.com/in/sarweshwaranrs/" target="_blank">LinkedIn</a>
 </p>
 
 ---
