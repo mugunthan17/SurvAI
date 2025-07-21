@@ -62,7 +62,7 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
         - 📂api
             - 📄survaiApi.js
         - 📂assets
-            - 📂reqImgs #Which has the all the required Images for the Pages
+            - 📂reqImgs (Which has the all the required Images for the Pages)
                 - 📄Logo.png
         - 📂components
             - 📂AboutUsPageComponents
@@ -104,7 +104,7 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
       - 📂utils
           - 📄csvParser.js
           - 📄xlsxParser.js
-      - 📄.env file (which have the backend **Port Number** and **API Key**
+      - 📄.env file (which have the backend **Port Number** and **API Key**)
       - 📄package-lock.json
       - 📄package.json
       - 📄server.js
