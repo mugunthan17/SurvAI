@@ -174,3 +174,6 @@ node server.js
 The backend server will start on:
 👉 http://localhost:3000
 
+### Now you're all set to use SurvAI locally! 🎉
+
+
