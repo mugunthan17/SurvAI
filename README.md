@@ -201,8 +201,6 @@ Photos comes here
   - 💼 <a href="https://www.linkedin.com/in/sarweshwaranrs/" target="_blank">LinkedIn</a>
 </p>
 
----
-
 We welcome feedback and contributions! Feel free to reach any one of us or fork the project to enhance something awesome.
 
 ---
