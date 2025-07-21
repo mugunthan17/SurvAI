@@ -113,8 +113,6 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
 
 Follow the steps below to set up and run SurvAI on your local machine.
 
----
-
 ### ✅ Prerequisites
 
 Ensure the following are installed on your system:
@@ -123,7 +121,6 @@ Ensure the following are installed on your system:
 - [npm](https://www.npmjs.com/)
 - [Git](https://git-scm.com/)
 
----
 
 ### 📦 Installation & Setup
 
