@@ -14,7 +14,7 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
 - [📦 Project Structure](#-project-structure)
 - [⚙️ Getting Started](#getting-started)
   - [Prerequisites](#-prerequisites)
-  - [Installation](#-installation)
+  - [Installation](#-installation--setup)
   - [Running Locally](#-running-locally)
 - [📸 Screenshots](#-screenshots)
 - [🤝 Contributing](#-contributing)
