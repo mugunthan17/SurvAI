@@ -191,4 +191,6 @@ Contributions comes here
 Contact comes here
 
 ---
-### 💙 THANK YOU SO MUCH 💙
+### 💙 **THANK YOU SO MUCH** 💙
+Thank you for your time and interest in SurvAI.  
+I truly appreciate your support and hope this project proves valuable to you!
