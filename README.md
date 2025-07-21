@@ -17,7 +17,7 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
   - [Installation](#-installation--setup)
   - [Running Locally](#-running-locally)
 - [📸 Screenshots](#-screenshots)
-- [🤝 Contributing](#-contributing)
+- [🤝 Contributions](#-contributions)
 - [📬 Contact](#-contact)
 
 
@@ -182,13 +182,13 @@ Photos comes here
 
 ---
 
-### 📸 Screenshots
-Photos comes here
+### 🤝 Contributions
+Contributions comes here
 
 ---
 
-### 📸 Screenshots
-Photos comes here
+### 📬 Contact
+Contact comes here
 
 ---
 ###❤︎THANK YOU SO MUCH ❤︎
