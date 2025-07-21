@@ -18,7 +18,6 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
   - [Running Locally](#-running-locally)
 - [📸 Screenshots](#-screenshots)
 - [🤝 Contributing](#-contributing)
-- [🪪 License](#-license)
 - [📬 Contact](#-contact)
 
 
@@ -176,4 +175,20 @@ The backend server will start on:
 
 ### Now you're all set to use SurvAI locally! 🎉
 
+---
 
+### 📸 Screenshots
+Photos comes here
+
+---
+
+### 📸 Screenshots
+Photos comes here
+
+---
+
+### 📸 Screenshots
+Photos comes here
+
+---
+###❤︎THANK YOU SO MUCH ❤︎
