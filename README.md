@@ -17,9 +17,7 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
   - [Installation](#-installation--setup)
   - [Running Locally](#-running-locally)
 - [📸 Screenshots](#-screenshots)
-- [🤝 Contributions](#-contributions)
-- [📬 Contact](#-contact)
-
+- [🤝 Meet the Contributions](#-contributions)
 
 ---
 
@@ -183,12 +181,26 @@ Photos comes here
 ---
 
 ### 🤝 Contributions
-Contributions comes here
+
+This project is brought to you by:
+
+- 👤 **Mugunthan N**  
+  🖌️ Designer & Developer
+  🔗 [Portfolio](https://mugunthan17.github.io/portfolio-website/)  
+  💼 [LinkedIn](www.linkedin.com/in/mugunthann)  
+
+- 👤 **Nitish B**  
+  🧠 Developer & Collaborator
+  🔗 [Portfolio](https://nitishb.me/)  
+  💼 [LinkedIn](https://www.linkedin.com/in/nitishb-dev/)  
+
+- 👤 **Sarweshwaran R S**  
+  🧑‍💻 Developer & Collaborator  
+  💼 [LinkedIn](https://www.linkedin.com/in/sarweshwaranrs/)  
 
 ---
 
-### 📬 Contact
-Contact comes here
+We welcome feedback and contributions! Feel free to reach any one of us or fork the project to enhance something awesome.
 
 ---
 ### 💙 **THANK YOU SO MUCH** 💙
