@@ -4,7 +4,6 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import Logo from "./../../assets/Logo.png";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { answer } from "./../../assets/Data/customQuestionData.js";
 
 const FileUpload = () => {
   const [fileInfo, setFileInfo] = useState(null);
