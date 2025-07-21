@@ -19,3 +19,14 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
 - [📬 Contact](#-contact)
 
 ---
+
+## 🚀 Features
+
+- 📤 Upload .csv/.xls/.xlsx based survey responses file.
+- 🧠 AI-driven **Emotional Analysis** & **Full Summary Generation**.
+- 📊 Visual reports with **Pie Charts**.
+- 🖨 Export results as **PDF** reports.
+- 💾 No Database used — hence **SurvAI** Lightweight and Super fast.
+
+---
+
