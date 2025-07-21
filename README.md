@@ -35,3 +35,18 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
 
 ---
 
+## 🛠 Tech Stack
+
+**Frontend**  
+- React.js  
+- Tailwind CSS  
+- Recharts (for **Data** Visualization)  
+- jsPDF & html2canvas (for **PDF** export)
+
+**Backend**  
+- Node.js  
+- Express.js  
+- Gemini API (for AI-driven analysis)  
+- dotenv & cors
+
+---
