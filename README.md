@@ -63,7 +63,7 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
             - 📄survaiApi.js
         - 📂assets
             - 📂reqImgs (Which has the all the required Images for the Pages)
-            - 📄Logo.png
+                - 📄Logo.png
         - 📂components
             - 📂AboutUsPageComponents
                 - 📄AboutUsHero.jsx
