@@ -178,6 +178,8 @@ The backend server will start on:
 ### 📸 Screenshots
 
 ### **1. Fully Summary Analysis**
+<img width="1920" height="1661" alt="Capture 1" src="https://github.com/user-attachments/assets/0d39f366-5fed-4237-84a8-1afd145ceddc" />
+
 
 ### **2. Custom Question Answering**
 <img width="1920" height="918" alt="Capture-1 1" src="https://github.com/user-attachments/assets/91589bca-aaba-458c-af2e-a95fffa3633e" />
