@@ -56,23 +56,23 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
 📂SurvAI
   - 📂survAI-frontEnd
     - 📂node_modules
-      - 📂public
-          - 📄 WebLogo.png
-      - 📂src
-          - 📂api
-              - 📄survaiApi.js
-          - 📂assets
-              - 📂reqImgs (Which has the all the required Images for the Pages)
-              - 📄Logo.png
-          - 📂components
-              - 📂AboutUsPageComponents
-                  - 📄AboutUsHero.jsx
-                  - 📄CoreValues.jsx
-                  - 📄MissionVision.jsx
-                  - 📄OurTeam.jsx
-              - 📂FeaturePageComponents
+    - 📂public
+        - 📄 WebLogo.png
+    - 📂src
+        - 📂api
+            - 📄survaiApi.js
+        - 📂assets
+            - 📂reqImgs (Which has the all the required Images for the Pages)
+            - 📄Logo.png
+        - 📂components
+            - 📂AboutUsPageComponents
+                - 📄AboutUsHero.jsx
+                - 📄CoreValues.jsx
+                - 📄MissionVision.jsx
+                - 📄OurTeam.jsx
+            - 📂FeaturePageComponents
                   - 📄FileUpload.jsx
-              - 📂HomePageComponents
+            - 📂HomePageComponents
                   - 📄AboutSection.jsx
                   - 📄BlogsSection.jsx
                   - 📄CTASection.jsx
@@ -81,14 +81,14 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
                   - 📄HeroSection.jsx
                   - 📄Navbar.jsx
                   - 📄UseCasesSection.jsx
-          - 📂pages
-              - 📄AboutUsPage.jsx
-              - 📄BlogsPage.jsx
-              - 📄FeaturePage.jsx
-              - 📄HomePage.jsx
-          - 📄App.jsx
-          - 📄index.css
-          - 📄main.jsx
+        - 📂pages
+            - 📄AboutUsPage.jsx
+            - 📄BlogsPage.jsx
+            - 📄FeaturePage.jsx
+            - 📄HomePage.jsx
+        - 📄App.jsx
+        - 📄index.css
+        - 📄main.jsx
       - 📄eslint.config.js
       - 📄index.html
       - 📄package-lock.json
