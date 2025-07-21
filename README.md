@@ -112,7 +112,7 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
 
 ---
 
-## Getting Started ⚙️
+## Getting Started
 
 Follow the steps below to set up and run SurvAI on your local machine.
 
