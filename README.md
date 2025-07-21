@@ -71,16 +71,16 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
                 - 📄MissionVision.jsx
                 - 📄OurTeam.jsx
             - 📂FeaturePageComponents
-                  - 📄FileUpload.jsx
+                - 📄FileUpload.jsx
             - 📂HomePageComponents
-                  - 📄AboutSection.jsx
-                  - 📄BlogsSection.jsx
-                  - 📄CTASection.jsx
-                  - 📄FeatureSection.jsx
-                  - 📄Footer.jsx
-                  - 📄HeroSection.jsx
-                  - 📄Navbar.jsx
-                  - 📄UseCasesSection.jsx
+                - 📄AboutSection.jsx
+                - 📄BlogsSection.jsx
+                - 📄CTASection.jsx
+                - 📄FeatureSection.jsx
+                - 📄Footer.jsx
+                - 📄HeroSection.jsx
+                - 📄Navbar.jsx
+                - 📄UseCasesSection.jsx
         - 📂pages
             - 📄AboutUsPage.jsx
             - 📄BlogsPage.jsx
