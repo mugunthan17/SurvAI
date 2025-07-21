@@ -55,7 +55,7 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
 
 📂SurvAI/
   - 📂survAI-frontEnd
-      -📂node_modules
+    -📂node_modules
       -📂public
           -📄 WebLogo.png
       -📂src
