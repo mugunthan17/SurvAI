@@ -186,7 +186,7 @@ This project is brought to you by:
 
 👤 **Mugunthan N**  
 🖌️ Designer & Developer
-🔗 [Portfolio](https://mugunthan17.github.io/portfolio-website/)  
+\n🔗 [Portfolio](https://mugunthan17.github.io/portfolio-website/)  
 💼 [LinkedIn](www.linkedin.com/in/mugunthann)  
 
 👤 **Nitish B**  
