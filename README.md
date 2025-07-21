@@ -53,61 +53,61 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
 
 ## 📦 Project Structure
 
-📂 SurvAI/
+SurvAI/
 │
-├── 📂 survAI-frontEnd/                # Frontend: React + Vite
-│   ├── 📂 node_modules/
-│   ├── 📂 public/
-│   │   └── 📄 WebLogo.png
-│   ├── 📂 src/
-│   │   ├── 📂 api/
-│   │   │   └── 📄 survaiApi.js
-│   │   ├── 📂 assets/
-│   │   │   ├── 📂 reqImgs/            # All images used in UI
-│   │   │   └── 📄 Logo.png
-│   │   ├── 📂 components/
-│   │   │   ├── 📂 AboutUsPageComponents/
-│   │   │   │   ├── 📄 AboutUsHero.jsx
-│   │   │   │   ├── 📄 CoreValues.jsx
-│   │   │   │   ├── 📄 MissionVision.jsx
-│   │   │   │   └── 📄 OurTeam.jsx
-│   │   │   ├── 📂 FeaturePageComponents/
-│   │   │   │   └── 📄 FileUpload.jsx
-│   │   │   └── 📂 HomePageComponents/
-│   │   │       ├── 📄 AboutSection.jsx
-│   │   │       ├── 📄 BlogsSection.jsx
-│   │   │       ├── 📄 CTASection.jsx
-│   │   │       ├── 📄 FeatureSection.jsx
-│   │   │       ├── 📄 Footer.jsx
-│   │   │       ├── 📄 HeroSection.jsx
-│   │   │       ├── 📄 Navbar.jsx
-│   │   │       └── 📄 UseCasesSection.jsx
-│   │   ├── 📂 pages/
-│   │   │   ├── 📄 AboutUsPage.jsx
-│   │   │   ├── 📄 BlogsPage.jsx
-│   │   │   ├── 📄 FeaturePage.jsx
-│   │   │   └── 📄 HomePage.jsx
-│   │   ├── 📄 App.jsx
-│   │   ├── 📄 index.css
-│   │   └── 📄 main.jsx
-│   ├── 📄 eslint.config.js
-│   ├── 📄 index.html
-│   ├── 📄 package-lock.json
-│   ├── 📄 package.json
-│   └── 📄 vite.config.js
+├── survAI-frontEnd/ # Frontend: React + Vite
+│ ├── node_modules/
+│ ├── public/
+│ │ └── WebLogo.png
+│ ├── src/
+│ │ ├── api/
+│ │ │ └── survaiApi.js
+│ │ ├── assets/
+│ │ │ ├── reqImgs/ # All images used in UI
+│ │ │ └── Logo.png
+│ │ ├── components/
+│ │ │ ├── AboutUsPageComponents/
+│ │ │ │ ├── AboutUsHero.jsx
+│ │ │ │ ├── CoreValues.jsx
+│ │ │ │ ├── MissionVision.jsx
+│ │ │ │ └── OurTeam.jsx
+│ │ │ ├── FeaturePageComponents/
+│ │ │ │ └── FileUpload.jsx
+│ │ │ └── HomePageComponents/
+│ │ │ ├── AboutSection.jsx
+│ │ │ ├── BlogsSection.jsx
+│ │ │ ├── CTASection.jsx
+│ │ │ ├── FeatureSection.jsx
+│ │ │ ├── Footer.jsx
+│ │ │ ├── HeroSection.jsx
+│ │ │ ├── Navbar.jsx
+│ │ │ └── UseCasesSection.jsx
+│ │ ├── pages/
+│ │ │ ├── AboutUsPage.jsx
+│ │ │ ├── BlogsPage.jsx
+│ │ │ ├── FeaturePage.jsx
+│ │ │ └── HomePage.jsx
+│ │ ├── App.jsx
+│ │ ├── index.css
+│ │ └── main.jsx
+│ ├── eslint.config.js
+│ ├── index.html
+│ ├── package-lock.json
+│ ├── package.json
+│ └── vite.config.js
 │
-└── 📂 survAI-backEnd/                # Backend: Node.js + Express
-    ├── 📂 node_modules/
-    ├── 📂 routers/
-    │   ├── 📄 CustomRoute.js         # Route for custom analysis
-    │   └── 📄 SummaryRoute.js        # Route for summary generation
-    ├── 📂 uploads/                   # Uploaded user files
-    ├── 📂 utils/
-    │   ├── 📄 csvParser.js           # CSV parsing logic
-    │   └── 📄 xlsxParser.js          # XLSX parsing logic
-    ├── 📄 .env                       # Contains backend PORT and API key
-    ├── 📄 package-lock.json
-    ├── 📄 package.json
-    └── 📄 server.js                  # Main entry point for backend server
+└── survAI-backEnd/ # Backend: Node.js + Express
+├── node_modules/
+├── routers/
+│ ├── CustomRoute.js 
+│ └── SummaryRoute.js 
+├── uploads/ 
+├── utils/
+│ ├── csvParser.js 
+│ └── xlsxParser.js 
+├── .env (Contains PORT number and API Key)
+├── package-lock.json
+├── package.json
+└── server.js
 
 ---
