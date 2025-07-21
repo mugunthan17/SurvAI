@@ -12,7 +12,7 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
 - [🚀 Features](#-features)
 - [🛠 Tech Stack](#-tech-stack)
 - [📦 Project Structure](#-project-structure)
-- [Getting Started](#getting-started)
+- [⚙️ Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Running Locally](#running-locally)
@@ -112,7 +112,7 @@ SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user surv
 
 ---
 
-## Getting Started
+## Getting Started ⚙️
 
 Follow the steps below to set up and run SurvAI on your local machine.
 
