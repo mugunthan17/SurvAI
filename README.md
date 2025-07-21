@@ -204,6 +204,6 @@ Photos comes here
 We welcome feedback and contributions! Feel free to reach any one of us or fork the project to enhance something awesome.
 
 ---
-### 💙 **THANK YOU SO MUCH** 💙
+### 🖤💙 **THANK YOU SO MUCH** 🖤💙
 Thank you for your time and interest in SurvAI.  
 I truly appreciate your support and hope this project proves valuable to you!
