@@ -147,8 +147,30 @@ cd ..
 cd survAI-backEnd
 npm install
 ```
-### 3. **Setup Environment Variables**
+### 4. **Setup Environment Variables**
 ```bash
 PORT=3000
 OPENAI_API_KEY=your_openai_api_key_here
 ```
+
+### ✅ Running Locally
+
+### **Open two terminals to run both the frontend and backend**
+### **Start Frontend**
+```bash
+cd ..
+cd survAI-frontEnd
+npm run dev
+```
+The frontend will be available at:
+👉 http://localhost:5173
+
+### **Start Backnd**
+```bash
+cd ..
+cd survAI-backEnd
+node server.js
+```
+The backend server will start on:
+👉 http://localhost:3000
+
