@@ -185,18 +185,18 @@ Photos comes here
 This project is brought to you by:
 
 👤 **Mugunthan N**  
-🖌️ Designer & Developer
-\n🔗 [Portfolio](https://mugunthan17.github.io/portfolio-website/)  
-💼 [LinkedIn](www.linkedin.com/in/mugunthann)  
+  - 🖌️ Designer & Developer
+  - 🔗 [Portfolio](https://mugunthan17.github.io/portfolio-website/)  
+  - 💼 [LinkedIn](www.linkedin.com/in/mugunthann)  
 
 👤 **Nitish B**  
-🧠 Developer & Collaborator
-🔗 [Portfolio](https://nitishb.me/)  
-💼 [LinkedIn](https://www.linkedin.com/in/nitishb-dev/)  
+  - 🧠 Developer & Collaborator
+  - 🔗 [Portfolio](https://nitishb.me/)  
+  - 💼 [LinkedIn](https://www.linkedin.com/in/nitishb-dev/)  
 
 👤 **Sarweshwaran R S**  
-🧑‍💻 Developer & Collaborator  
-💼 [LinkedIn](https://www.linkedin.com/in/sarweshwaranrs/)  
+  - 🧑‍💻 Developer & Collaborator  
+  - 💼 [LinkedIn](https://www.linkedin.com/in/sarweshwaranrs/)  
 
 ---
 
