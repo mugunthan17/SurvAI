@@ -141,3 +141,14 @@ cd SurvAI
 cd survAI-frontEnd
 npm install
 ```
+### 3. **Install Backend dependencies**
+```bash
+cd ..
+cd survAI-backEnd
+npm install
+```
+### 3. **Setup Environment Variables**
+```bash
+PORT=3000
+OPENAI_API_KEY=your_openai_api_key_here
+```
