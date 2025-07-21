@@ -123,8 +123,8 @@ Follow the steps below to set up and run SurvAI on your local machine.
 Ensure the following are installed on your system:
 
 - [Node.js](https://nodejs.org/) 
-- npm 
-- Git
+- [npm](https://www.npmjs.com/)
+- [Git](https://git-scm.com/)
 
 ---
 
