@@ -3,7 +3,7 @@ import HomePage from "../src/pages/HomePage.jsx";
 import FeaturePage from "../src/pages/FeaturePage.jsx";
 import AboutUsPage from "./pages/AboutUsPage.jsx";
 import BlogsPage from "./pages/BlogsPage.jsx";
-import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import ProtectedRoute from "./components/Routing/ProtectedRoute.jsx";
 import "./index.css";
 
 const App = () => {
