@@ -33,7 +33,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-8 left-0 right-0 z-50 mx-auto lg:w-full px-4">
+    <nav className="fixed top-12 left-0 right-0 z-50 mx-auto lg:w-full px-4">
       <div className="relative max-w-6xl mx-auto">
         {/* Top Bar */}
         <div className="flex items-center justify-between border-2 border-[#2A3BFF] rounded-3xl px-8 py-4 bg-[#EEEEEE]/35 backdrop-blur-sm shadow-none">

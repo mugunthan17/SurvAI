@@ -4,7 +4,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className=" text-center flex flex-col items-center justify-center py-30 lg:py-25 md:py-30">
+    <section className=" text-center flex flex-col items-center justify-center py-30">
       <h2 className="pt-4 text-3xl lg:text-5xl md:text-3xl text-[#0C0C0C] alexa w-[80%] lg:w-[80%] md:w-[80%] font-semibold leading-snug">
         Get Summary of your Survey Responses <br /> in Seconds with{" "}
         <span className="text-[#2A3BFF]">AI</span>
