@@ -1,7 +1,26 @@
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import UserAuthForm from './../LinkedInAuth/UserAuthForm.jsx';
 
 const HeroSection = () => {
   const navigate = useNavigate();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const location = useLocation();
+
+  const handleGetStartedClick = () => {
+    const linkedInId = localStorage.getItem("survai_linkedin_id");
+    if (linkedInId) {
+      navigate("/feature");
+    } else {
+      setShowAuthModal(true);
+    }
+  };
+
+  const handleAuthSubmit = (id) => {
+    setShowAuthModal(false);
+    navigate("/feature");
+  };
 
   return (
     <section className=" text-center flex flex-col items-center justify-center py-30">
@@ -14,7 +33,7 @@ const HeroSection = () => {
         summaries to deep analytics, see what people really think.
       </p>
       <button
-        onClick={() => navigate("/feature")}
+        onClick={handleGetStartedClick}
         className="mt-6 px-6 md:px-8 lg:px-8 py-3 md:py-4 lg:py-4 bg-[#2A3BFF] text-[#EEEEEE] pop text-base lg:text-xl md:text-xl rounded-4xl font-medium flex items-center gap-2 cursor-pointer transition-shadow hover:shadow-[0_0_12px_#2A3BFF]"
       >
         Get Started Now
@@ -27,6 +46,12 @@ const HeroSection = () => {
           <path d="M16 8.4L7.1 17.3a.984.984 0 0 1-1.4 0 .984.984 0 0 1 0-1.4L14.6 7H7a1 1 0 0 1 0-2h10a1 1 0 0 1 1 1v10a1 1 0 1 1-2 0V8.4z" />
         </svg>
       </button>
+      {showAuthModal && (
+        <UserAuthForm
+          onClose={() => setShowAuthModal(false)}
+          onAuthenticated={handleAuthSubmit}
+        />
+      )}
     </section>
   );
 };
