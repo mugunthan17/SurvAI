@@ -5,4 +5,4 @@ const parseCSV = async (filePath) => {
     return data;
 };
 
-export default parseCSV;
+export default parseCS;
