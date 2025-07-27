@@ -19,8 +19,7 @@ const UserAuthForm = ({ onAuthenticated, onClose }) => {
     setError("");
 
     const trimmedUrl = linkedinUrl.trim();
-    const regex =
-      /^https?:\/\/(www\.)?linkedin\.com\/in\/[a-zA-Z0-9-_]+\/?$/;
+    const regex = /^https?:\/\/(www\.)?linkedin\.com\/in\/[a-zA-Z0-9-_]+\/?$/;
     if (!regex.test(trimmedUrl)) {
       setError("Please enter a valid LinkedIn profile URL.");
       return;
@@ -58,10 +57,10 @@ const UserAuthForm = ({ onAuthenticated, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-[#00000088] flex justify-center items-center z-50">
+    <div className="fixed inset-0 bg-[#00000088] backdrop-blur-sm flex justify-center items-center z-50">
       <form
         onSubmit={handleSubmit}
-        className="relative bg-white p-6 rounded-xl shadow-lg w-full max-w-md"
+        className="relative bg-white p-6 rounded-xl shadow-lg w-full max-w-md sm:mx-4"
       >
         <button
           type="button"
@@ -82,13 +81,11 @@ const UserAuthForm = ({ onAuthenticated, onClose }) => {
           placeholder="https://www.linkedin.com/in/your-profile"
           value={linkedinUrl}
           onChange={(e) => setLinkedinUrl(e.target.value)}
-          className="pop w-full border-2 border-[#2A3BFF] p-3 rounded-md mb-4"
+          className="pop w-full border-2 p-3 rounded-md mb-4 border-[#2A3BFF] focus:border-2 focus:border-[#2A3BFF]"
         />
 
         {error && (
-          <p className="pop text-[#FF2A2D] text-sm text-center mb-4">
-            {error}
-          </p>
+          <p className="pop text-[#FF2A2D] text-sm text-center mb-4">{error}</p>
         )}
 
         <button
