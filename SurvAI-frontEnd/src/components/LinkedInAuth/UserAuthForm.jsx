@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-const googleScriptURL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+const googleScriptURL = '/api';
 
 const UserAuthForm = ({ onAuthenticated, onClose }) => {
   const [linkedinUrl, setLinkedinUrl] = useState("");
@@ -19,8 +19,9 @@ const UserAuthForm = ({ onAuthenticated, onClose }) => {
     setError("");
 
     const trimmedUrl = linkedinUrl.trim();
+    const normalizedUrl = trimmedUrl.toLowerCase().replace(/\/+$/,"");
     const regex = /^https?:\/\/(www\.)?linkedin\.com\/in\/[a-zA-Z0-9-_]+\/?$/;
-    if (!regex.test(trimmedUrl)) {
+    if (!regex.test(normalizedUrl)) {
       setError("Please enter a valid LinkedIn profile URL.");
       return;
     }
@@ -28,13 +29,13 @@ const UserAuthForm = ({ onAuthenticated, onClose }) => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api", {
+      const response = await fetch(googleScriptURL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         mode: "cors", // important!
-        body: JSON.stringify({ linkedinId: trimmedUrl }),
+        body: JSON.stringify({ linkedinId: normalizedUrl }),
       });
 
       const rawText = await response.text();
@@ -46,8 +47,8 @@ const UserAuthForm = ({ onAuthenticated, onClose }) => {
         throw new Error(result.message || "Unknown error from server.");
       }
 
-      localStorage.setItem("survai_linkedin_id", trimmedUrl);
-      onAuthenticated(trimmedUrl);
+      localStorage.setItem("survai_linkedin_id", normalizedUrl);
+      onAuthenticated(normalizedUrl);
     } catch (err) {
       console.error("Submission error:", err);
       setError(err.message || "Failed to submit. Please try again.");
