@@ -46,9 +46,10 @@ const UserAuthForm = ({ onAuthenticated, onClose }) => {
       if (result.status !== "success") {
         throw new Error(result.message || "Unknown error from server.");
       }
-
-      localStorage.setItem("survai_linkedin_id", normalizedUrl);
-      onAuthenticated(normalizedUrl);
+      if(result.status == "success"){
+        localStorage.setItem("survai_linkedin_id", normalizedUrl);
+        onAuthenticated(normalizedUrl);
+      }
     } catch (err) {
       console.error("Submission error:", err);
       setError(err.message || "Failed to submit. Please try again.");
