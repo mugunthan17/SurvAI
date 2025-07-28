@@ -2,8 +2,9 @@
 <img width="2129" height="682" alt="logo" src="https://github.com/user-attachments/assets/87709af0-9a37-4fb2-9b5c-90789bbaad80" />
 
 
-<p style={display: flex;
-  justify-content: center;}>SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user survey responses. It extracts emotions and key insights and also answers you questions from uploaded .CSV/.XLS/.XLSX files. Particulary built for Researchers, Marketers, Analysts, and Students seeking to decode large volumes of qualitative feedback/summary in seconds.</p>
+<p align="justify">
+SurvAI leverages Artificial Intelligence (AI) to analyze and visualize user survey responses. It extracts emotions and key insights and also answers your questions from uploaded `.CSV`, `.XLS`, or `.XLSX` files. Particularly built for researchers, marketers, analysts, and students seeking to decode large volumes of qualitative feedback in seconds.
+</p>
 
 
 ---
