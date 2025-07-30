@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "./../components/HomePageComponents/Navbar.jsx";
 import Footer from "./../components/HomePageComponents/Footer.jsx";
 import blogs from "../../public/BlogsData/blogs.js";
+import FadeInSection from "./../components/Animations/FadeInSection.jsx";
 
 function BlogsPage() {
   const navigate = useNavigate();
@@ -33,31 +34,32 @@ function BlogsPage() {
         <h1 className="text-center alexa text-[#0C0C0C] mt-20 text-4xl font-bold">
           Surv<span className="text-[#2A3BFF]">AI</span> Blogs
         </h1>
-
-        <div className="grid gap-6 md:grid-cols-3 my-16 max-w-6xl  mx-auto px-4">
-          {blogs.map((blog) => (
-            <div
-              key={blog.id}
-              onClick={() => handleCardClick(blog)}
-              className="bg-[#EEEEEE] border-2 border-[#2A3BFF] rounded-3xl shadow-sm hover:shadow-md px-6 py-4 transition text-left cursor-pointer"
-            >
-              <img
-                src={blog.image}
-                alt={blog.title}
-                className="rounded-xl mb-4 w-full object-cover" 
-              />
-              <h3 className="font-medium alexa text-xl text-[#0C0C0C] line-clamp-2">
-                {blog.title}
-              </h3>
-              <p className="mt-2 font-medium alexa text-base text-[#555555] line-clamp-3">
-                {blog.content}
-              </p>
-              <p className="mt-4 text-[#2A3BFF] pop text-sm font-medium">
-                Continue Read ➜
-              </p>
-            </div>
-          ))}
-        </div>
+        <FadeInSection>
+          <div className="grid gap-6 md:grid-cols-3 my-16 max-w-6xl  mx-auto px-4">
+            {blogs.map((blog) => (
+              <div
+                key={blog.id}
+                onClick={() => handleCardClick(blog)}
+                className="bg-[#EEEEEE] border-2 border-[#2A3BFF] rounded-3xl shadow-sm hover:shadow-md px-6 py-4 transition text-left cursor-pointer"
+              >
+                <img
+                  src={blog.image}
+                  alt={blog.title}
+                  className="rounded-xl mb-4 w-full object-cover"
+                />
+                <h3 className="font-medium alexa text-xl text-[#0C0C0C] line-clamp-2">
+                  {blog.title}
+                </h3>
+                <p className="mt-2 font-medium alexa text-base text-[#555555] line-clamp-3">
+                  {blog.content}
+                </p>
+                <p className="mt-4 text-[#2A3BFF] pop text-sm font-medium">
+                  Continue Read ➜
+                </p>
+              </div>
+            ))}
+          </div>
+        </FadeInSection>
 
         <Footer />
       </div>

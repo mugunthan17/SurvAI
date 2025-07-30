@@ -3,11 +3,13 @@ import OurMission from "./../../assets/reqImgs/OurMission.png";
 import OurMissionMedium from "./../../assets/reqImgs/OurMissionMedium.png";
 import OurVision from "./../../assets/reqImgs/OurVision.png";
 import OurVisionMedium from "./../../assets/reqImgs/OurVisionMedium.png";
+import FadeInSection from "./../Animations/FadeInSection.jsx";
 
 function MissionVision() {
   return (
     <div>
       {/* For small & medium screens */}
+      <FadeInSection>
       <div>
         <div className="mx-auto flex items-center flex-col lg:hidden px-4 mt-25 md:mt-30">
           <h1 className="alexa text-[#2A3AF7] text-2xl md:text-5xl font-medium text-center mb-4">
@@ -48,8 +50,10 @@ function MissionVision() {
           </div>
         </div>
       </div>
+      </FadeInSection>
 
       {/*Vision*/}
+      <FadeInSection>
       <div>
         <div className="mx-auto flex items-center flex-col lg:hidden px-4 mt-25">
           <h1 className="alexa text-[#2A3AF7] text-2xl md:text-5xl font-medium text-center mb-4">
@@ -89,6 +93,7 @@ function MissionVision() {
           </div>
         </div>
       </div>
+      </FadeInSection>
     </div>
   );
 }

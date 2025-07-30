@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useEffect}from "react";
 import Navbar from "../components/HomePageComponents/Navbar.jsx";
 import Footer from './../components/HomePageComponents/Footer.jsx';
 import AboutUsHero from './../components/AboutUsPageComponents/AboutUsHero.jsx';
@@ -8,6 +8,9 @@ import OurTeam from './../components/AboutUsPageComponents/OurTeam.jsx';
 
 
 const AboutUsPage = () => {
+  useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
   return (
     <div className="relative pt-[90px] min-h-screen overflow-hidden">
       <div className="absolute inset-0 bg-[#EEEEEE] z-0" />
