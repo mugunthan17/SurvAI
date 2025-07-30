@@ -1,3 +1,4 @@
+import FadeInSection from "./../Animations/FadeInSection.jsx";
 const FeaturesSection = () => {
   const features = [
     {
@@ -23,24 +24,30 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <section id="features" className="py-36 px-4 text-center">
-      <h2 className="text-3xl lg:text-4xl md:text-3xl alexa px-2 font-bold mb-12 text-[#0C0C0C]">
-        Features - What Surv<span className="text-[#2A3BFF]">AI</span> Can Do
-        for You
-      </h2>
+    <FadeInSection>
+      <section id="features" className="py-36 px-4 text-center">
+        <h2 className="text-3xl lg:text-4xl md:text-3xl alexa px-2 font-bold mb-12 text-[#0C0C0C]">
+          Features - What Surv<span className="text-[#2A3BFF]">AI</span> Can Do
+          for You
+        </h2>
 
-      <div className="grid gap-6 md:grid-cols-2 max-w-6xl mx-auto">
-        {features.map((feature, idx) => (
-          <div
-            key={idx}
-            className="bg-white border-2 border-[#2A3BFF] rounded-3xl py-8 px-12 text-left shadow hover:shadow-md transition"
-          >
-            <h3 className="text-[#0C0C0C] text-xl alexa font-semibold mb-1">{feature.title}</h3>
-            <p className="text-[#555555] pop text-base">{feature.description}</p>
-          </div>
-        ))}
-      </div>
-    </section>
+        <div className="grid gap-6 md:grid-cols-2 max-w-6xl mx-auto">
+          {features.map((feature, idx) => (
+            <div
+              key={idx}
+              className="bg-white border-2 border-[#2A3BFF] rounded-3xl py-8 px-12 text-left shadow hover:shadow-md transition"
+            >
+              <h3 className="text-[#0C0C0C] text-xl alexa font-semibold mb-1">
+                {feature.title}
+              </h3>
+              <p className="text-[#555555] pop text-base">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </FadeInSection>
   );
 };
 
