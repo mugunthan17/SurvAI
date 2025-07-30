@@ -41,9 +41,9 @@ const UseCasesSection = () => {
         </h2>
         
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
-          {useCases.map((item, idx) => (
+          {useCases.map((item, id) => (
             <div
-              key={idx}
+              key={id}
               className="bg-[#EEEEEE] border-2 border-[#2A3BFF] rounded-3xl p-8 shadow-sm hover:shadow-md transition text-center"
             >
               <img
