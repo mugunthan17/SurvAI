@@ -69,6 +69,16 @@ More detailed paragraphs for blog 3 will go here as you expand the content.
 <strong>Full content of blog 3 goes here...</strong><br/>
 More detailed paragraphs for blog 3 will go here as you expand the content.
     `
+  },
+  {
+    id: "5",
+    title: "Random Blog Title for SurvAI - AI Survey Response Summarizer",
+    image: "/BlogsImages/blog1bg.png",
+    author: "Sarweshwaran R S",
+    content: `
+<strong>Full content of blog 3 goes here...</strong><br/>
+More detailed paragraphs for blog 3 will go here as you expand the content.
+    `
   }
 ];
 
