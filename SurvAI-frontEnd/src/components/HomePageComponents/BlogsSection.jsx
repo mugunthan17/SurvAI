@@ -1,26 +1,16 @@
-import React, { use } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import blogs from "../../../public/BlogsData/blogs.js";
 
 const BlogsSection = () => {
   const navigate = useNavigate();
-  const blogs = [
-    {
-      title: "The Art of Asking: How to Write Survey Questions ....",
-      image: "/assets/blog1.png", // replace with your actual image paths
-    },
-    {
-      title: "Beyond the Checkbox: How to Collect Respons ....",
-      image: "/assets/blog2.png",
-    },
-    {
-      title: "From Feedback to Action: Turning Survey Respons ....",
-      image: "/assets/blog3.png",
-    },
-  ];
+
+  const handleCardClick = (blog) => {
+    navigate(`/blog/${blog.id}`, { state: blog });
+  };
 
   return (
     <section id="blogs" className="py-36 px-4 text-center">
-      {/* Section Title */}
       <h2 className="text-3xl lg:text-4xl md:text-3xl alexa font-bold mb-2 text-[#0C0C0C]">
         Surv<span className="text-[#2A3BFF]">AI</span> Blogs
       </h2>
@@ -28,34 +18,36 @@ const BlogsSection = () => {
         Blogs that will sharpen your questions, improve responses, & guide
         smarter decisions.
       </p>
+
       <a
         onClick={() => navigate("/blogs")}
-        className="text-[#2A3BFF] pop text-xl font-medium text-sm inline-block hover:cursor-pointer"
+        className="text-[#2A3BFF] pop text-xl font-medium inline-block mt-2 hover:cursor-pointer"
       >
         ➡️ Explore More Blogs ⬅️
       </a>
 
-      {/* Blog Cards */}
-      <div className="grid gap-6 md:grid-cols-3 mt-6 max-w-6xl mx-auto">
-        {blogs.map((blog, idx) => (
+      {/* Only First 3 Blog Cards */}
+      <div className="grid gap-6 md:grid-cols-3 mt-6 py-2 max-w-6xl mx-auto">
+        {blogs.slice(0, 3).map((blog) => (
           <div
-            key={idx}
-            className="bg-white border-2 border-[#2A3BFF] rounded-3xl shadow-sm hover:shadow-md px-6 py-4 transition text-left"
+            key={blog.id}
+            onClick={() => handleCardClick(blog)}
+            className="bg-[#EEEEEE] border-2 border-[#2A3BFF] rounded-3xl shadow-sm hover:shadow-md px-6 py-4 transition text-left cursor-pointer"
           >
             <img
               src={blog.image}
               alt={blog.title}
-              className="rounded-xl mb-4 w-full h-48 object-cover"
+              className="rounded-xl mb-4 w-full object-cover"
             />
-            <h3 className="font-medium alexa text-xl text-[#0C0C0C]">
+            <h3 className="font-medium alexa text-xl text-[#0C0C0C] line-clamp-2">
               {blog.title}
             </h3>
-            <a
-              href="#"
-              className="text-[#2A3BFF] pop text-sm font-medium hover:cursor-pointer"
-            >
+            <p className="mt-2 font-medium alexa text-base text-[#555555] line-clamp-3">
+              {blog.content}
+            </p>
+            <p className="mt-4 text-[#2A3BFF] pop text-sm font-medium">
               Continue Read ➜
-            </a>
+            </p>
           </div>
         ))}
       </div>

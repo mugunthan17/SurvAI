@@ -1,59 +1,20 @@
-import React from 'react'
-import Navbar from './../components/HomePageComponents/Navbar.jsx';
-import Footer from './../components/HomePageComponents/Footer.jsx';
-
-const blogs = [
-    {
-      title: "The Art of Asking: How to Write Survey Questions ....",
-      image: "/assets/blog1.png", // replace with your actual image paths
-    },
-    {
-      title: "Beyond the Checkbox: How to Collect Respons ....",
-      image: "/assets/blog2.png",
-    },
-    {
-      title: "From Feedback to Action: Turning Survey Respons ....",
-      image: "/assets/blog3.png",
-    },
-    {
-      title: "From Feedback to Action: Turning Survey Respons ....",
-      image: "/assets/blog3.png",
-    },
-    {
-      title: "From Feedback to Action: Turning Survey Respons ....",
-      image: "/assets/blog3.png",
-    },
-    {
-      title: "From Feedback to Action: Turning Survey Respons ....",
-      image: "/assets/blog3.png",
-    },
-    {
-      title: "From Feedback to Action: Turning Survey Respons ....",
-      image: "/assets/blog3.png",
-    },
-    {
-      title: "From Feedback to Action: Turning Survey Respons ....",
-      image: "/assets/blog3.png",
-    },
-    {
-      title: "From Feedback to Action: Turning Survey Respons ....",
-      image: "/assets/blog3.png",
-    },
-    {
-      title: "From Feedback to Action: Turning Survey Respons ....",
-      image: "/assets/blog3.png",
-    },
-    {
-      title: "From Feedback to Action: Turning Survey Respons ....",
-      image: "/assets/blog3.png",
-    },
-    {
-      title: "From Feedback to Action: Turning Survey Respons ....",
-      image: "/assets/blog3.png",
-    },
-  ];
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "./../components/HomePageComponents/Navbar.jsx";
+import Footer from "./../components/HomePageComponents/Footer.jsx";
+import blogs from "../../public/BlogsData/blogs.js";
 
 function BlogsPage() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  const handleCardClick = (blog) => {
+    navigate(`/blog/${blog.id}`, { state: blog });
+  };
+
   return (
     <div className="relative pt-[90px] min-h-screen overflow-hidden">
       <div className="absolute inset-0 bg-[#EEEEEE] z-0" />
@@ -69,35 +30,39 @@ function BlogsPage() {
       <div className="relative z-20">
         <Navbar />
 
-        <h1 className='text-center alexa text-[#0C0C0C] mt-20 text-4xl font-bold'>Surv<span className="text-[#2A3BFF]">AI</span> Blogs</h1>
-        <div className="grid gap-6 md:grid-cols-3 my-15 max-w-6xl mx-auto">
-        {blogs.map((blog, idx) => (
-          <div
-            key={idx}
-            className="bg-white border-2 border-[#2A3BFF] rounded-3xl shadow-sm hover:shadow-md px-6 py-4 transition text-left"
-          >
-            <img
-              src={blog.image}
-              alt={blog.title}
-              className="rounded-xl mb-4 w-full h-48 object-cover"
-            />
-            <h3 className="font-medium alexa text-xl text-[#0C0C0C]">
-              {blog.title}
-            </h3>
-            <a
-              href="#"
-              className="text-[#2A3BFF] pop text-sm font-medium hover:cursor-pointer"
+        <h1 className="text-center alexa text-[#0C0C0C] mt-20 text-4xl font-bold">
+          Surv<span className="text-[#2A3BFF]">AI</span> Blogs
+        </h1>
+
+        <div className="grid gap-6 md:grid-cols-3 my-16 max-w-6xl  mx-auto px-4">
+          {blogs.map((blog) => (
+            <div
+              key={blog.id}
+              onClick={() => handleCardClick(blog)}
+              className="bg-[#EEEEEE] border-2 border-[#2A3BFF] rounded-3xl shadow-sm hover:shadow-md px-6 py-4 transition text-left cursor-pointer"
             >
-              Continue Read ➜
-            </a>
-          </div>
-        ))}
+              <img
+                src={blog.image}
+                alt={blog.title}
+                className="rounded-xl mb-4 w-full object-cover" 
+              />
+              <h3 className="font-medium alexa text-xl text-[#0C0C0C] line-clamp-2">
+                {blog.title}
+              </h3>
+              <p className="mt-2 font-medium alexa text-base text-[#555555] line-clamp-3">
+                {blog.content}
+              </p>
+              <p className="mt-4 text-[#2A3BFF] pop text-sm font-medium">
+                Continue Read ➜
+              </p>
+            </div>
+          ))}
         </div>
 
         <Footer />
       </div>
     </div>
-  )
+  );
 }
 
-export default BlogsPage
+export default BlogsPage;
