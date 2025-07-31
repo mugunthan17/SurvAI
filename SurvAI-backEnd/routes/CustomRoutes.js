@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
 import dotenv from 'dotenv';
-import parseCSV  from '../utils/csvParser.js';
+import parseCSV from '../utils/csvParser.js';
 import parseExcel from "../utils/xlsxParser.js";
 
 const router = express.Router();
