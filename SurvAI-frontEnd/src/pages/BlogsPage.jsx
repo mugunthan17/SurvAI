@@ -1,19 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./../components/HomePageComponents/Navbar.jsx";
 import Footer from "./../components/HomePageComponents/Footer.jsx";
-import blogs from "../../public/BlogsData/blogs.js";
 import FadeInSection from "./../components/Animations/FadeInSection.jsx";
+import { fetchBlogs } from "./../api/blogsApi.js";
 
 function BlogsPage() {
   const navigate = useNavigate();
+  const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    const loadBlogs = async () => {
+      const blogData = await fetchBlogs();
+      setBlogs(blogData);
+    };
+
+    loadBlogs();
   }, []);
 
   const handleCardClick = (blog) => {
-    navigate(`/blog/${blog.id}`, { state: blog });
+    navigate(`/blog/${blog.notionUniqueId}`, { state: blog });
   };
 
   return (
@@ -34,16 +42,17 @@ function BlogsPage() {
         <h1 className="text-center alexa text-[#0C0C0C] mt-20 text-4xl font-bold">
           Surv<span className="text-[#2A3BFF]">AI</span> Blogs
         </h1>
+
         <FadeInSection>
-          <div className="grid gap-6 md:grid-cols-3 my-16 max-w-6xl  mx-auto px-4">
+          <div className="grid gap-6 md:grid-cols-3 my-16 max-w-6xl mx-auto px-4">
             {blogs.map((blog) => (
               <div
-                key={blog.id}
+                key={blog.notionUniqueId}
                 onClick={() => handleCardClick(blog)}
                 className="bg-[#EEEEEE] border-2 border-[#2A3BFF] rounded-3xl shadow-sm hover:shadow-md px-6 py-4 transition text-left cursor-pointer"
               >
                 <img
-                  src={blog.image}
+                  src={blog.imageUrl}
                   alt={blog.title}
                   className="rounded-xl mb-4 w-full object-cover"
                 />

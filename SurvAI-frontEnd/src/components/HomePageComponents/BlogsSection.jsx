@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import blogs from "../../../public/BlogsData/blogs.js";
-import FadeInSection from "./../Animations/FadeInSection.jsx";
+import { fetchBlogs } from './../../api/blogsApi.js';
+import FadeInSection from "../Animations/FadeInSection.jsx";
 
 const BlogsSection = () => {
   const navigate = useNavigate();
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const blogData = await fetchBlogs();
+      setBlogs(blogData);
+    };
+    loadData();
+  }, []);
 
   const handleCardClick = (blog) => {
-    navigate(`/blog/${blog.id}`, { state: blog });
+    navigate(`/blog/${blog.notionUniqueId}`, { state: blog });
   };
 
   return (
@@ -28,19 +37,20 @@ const BlogsSection = () => {
           ➡️ Explore More Blogs ⬅️
         </a>
 
-        {/* Only First 3 Blog Cards */}
         <div className="grid gap-6 md:grid-cols-3 mt-6 py-2 max-w-6xl mx-auto">
           {blogs.slice(0, 3).map((blog) => (
             <div
-              key={blog.id}
+              key={blog.notionUniqueId}
               onClick={() => handleCardClick(blog)}
               className="bg-[#EEEEEE] border-2 border-[#2A3BFF] rounded-3xl shadow-sm hover:shadow-md px-6 py-4 transition text-left cursor-pointer"
             >
-              <img
-                src={blog.image}
-                alt={blog.title}
-                className="rounded-xl mb-4 w-full object-cover"
-              />
+              {blog.imageUrl && (
+                <img
+                  src={blog.imageUrl}
+                  alt={blog.title}
+                  className="rounded-xl mb-4 w-full object-cover max-h-56"
+                />
+              )}
               <h3 className="font-medium alexa text-xl text-[#0C0C0C] line-clamp-2">
                 {blog.title}
               </h3>

@@ -46,7 +46,7 @@ function EntireBlog() {
           </FadeInSection>
           <FadeInSection>
             <img
-              src={blog.image}
+              src={blog.imageUrl}
               alt={blog.title}
               className="rounded-2xl w-full max-h-[400px] object-cover mb-2"
             />
