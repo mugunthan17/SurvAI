@@ -17,7 +17,7 @@ const FeaturesSection = () => {
         "SurvAI analyses the Survey’s Response & classify the response as Positive, Negative, or Neutral.",
     },
     {
-      title: "One-Click Report Export 📄",
+      title: "One-Click Report Export 📋",
       description:
         "Download your complete SurvAI summary report instantly in a clean, professional PDF report.",
     },
