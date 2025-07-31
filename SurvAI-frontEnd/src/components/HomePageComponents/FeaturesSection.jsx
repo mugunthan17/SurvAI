@@ -35,7 +35,7 @@ const FeaturesSection = () => {
           {features.map((feature, idx) => (
             <div
               key={idx}
-              className="bg-white border-2 border-[#2A3BFF] rounded-3xl py-8 px-12 text-left shadow hover:shadow-md transition"
+              className="bg-[#EEEEEE] border-2 border-[#2A3BFF] rounded-3xl py-8 px-12 text-left shadow hover:shadow-md transition"
             >
               <h3 className="text-[#0C0C0C] text-xl alexa font-semibold mb-1">
                 {feature.title}
