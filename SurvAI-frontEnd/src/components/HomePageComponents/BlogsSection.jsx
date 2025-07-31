@@ -23,7 +23,7 @@ const BlogsSection = () => {
 
         <a
           onClick={() => navigate("/blogs")}
-          className="text-[#2A3BFF] pop text-xl font-medium inline-block mt-2 hover:cursor-pointer"
+          className="text-[#2A3BFF] pop text-xl font-medium inline-block mt-2 hover:cursor-pointer hover:underline"
         >
           ➡️ Explore More Blogs ⬅️
         </a>

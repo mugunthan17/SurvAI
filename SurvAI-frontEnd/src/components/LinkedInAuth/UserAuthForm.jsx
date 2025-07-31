@@ -59,7 +59,7 @@ const UserAuthForm = ({ onAuthenticated, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-[#00000088] backdrop-blur-sm flex justify-center items-center z-50">
+    <div className="fixed inset-0 bg-[#00000088] backdrop-blur-sm flex justify-center items-center z-50 px-6 md:px-0">
       <form
         onSubmit={handleSubmit}
         className="relative bg-white p-6 rounded-xl shadow-lg w-full max-w-md sm:mx-4"
@@ -74,7 +74,7 @@ const UserAuthForm = ({ onAuthenticated, onClose }) => {
         <h2 className="alexa text-2xl font-semibold mt-1 mb-1 text-left text-[#2A3BFF]">
           Welcome to SurvAI
         </h2>
-        <p className="pop mb-3 text-[#555555] text-left">
+        <p className="pop mb-3 text-[#555555] text-left pr-2 md:pr-0">
           Please enter your full LinkedIn profile URL
         </p>
 
@@ -93,7 +93,7 @@ const UserAuthForm = ({ onAuthenticated, onClose }) => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`bg-[#2A3BFF] text-white w-full py-3 rounded-md font-semibold hover:cursor-pointer ${
+          className={`pop bg-[#2A3BFF] text-white w-full py-3 rounded-md font-semibold hover:cursor-pointer ${
             isSubmitting
               ? "opacity-50 cursor-not-allowed"
               : "hover:brightness-110"

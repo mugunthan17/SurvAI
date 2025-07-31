@@ -32,7 +32,7 @@ const CTASection = () => {
   return (
     <>
       <FadeInSection>
-        <section className="mb-24 lg:32 relative items-center text-center overflow-hidden text-white py-10 md:py-15 rounded-3xl mx-4 md:mx-auto max-w-6xl shadow-xl bg-gradient-to-r from-[#2A3BFF] to-[#2A3BFF] transition-all duration-100 ease-in-out">
+        <section className="mb-24 lg:32 relative items-center text-center overflow-hidden text-[#EEEEEE] py-10 md:py-15 rounded-3xl mx-4 md:mx-auto max-w-6xl shadow-xl bg-gradient-to-r from-[#2A3BFF] to-[#2A3BFF] transition-all duration-100 ease-in-out">
           {/* SurvAI Background Image */}
           <img
             src={SurvAITextImage}
