@@ -102,7 +102,7 @@ const Navbar = () => {
             onClick={handleTryNowClick}
             className="hidden lg:inline-flex pop items-center gap-1 px-5 py-2 rounded-full text-white bg-[#2A3BFF] text-base font-normal transition-shadow hover:shadow-[0_0_12px_#2A3BFF88] cursor-pointer"
           >
-            Try for free
+            Try Now
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-4 h-4"
